@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 @Service
 public class CalculationService {
@@ -103,18 +104,21 @@ public class CalculationService {
         if (calcUpdateRequestDTO.getEnergyConsumption() < 0) {
             throw new IllegalArgumentException("Energy consumption must be positive");
         }
+        if (calcUpdateRequestDTO.getTransportation() != null) {
+            for (TransportationDTO tDTO : calcUpdateRequestDTO.getTransportation()) {
+                if (TransportationType.fromString(tDTO.getType()) == null) {
+                    throw new IllegalArgumentException("Invalid transportation type");
+                }
 
-        for (TransportationDTO tDTO : calcUpdateRequestDTO.getTransportation()) {
-            if (TransportationType.fromString(tDTO.getType()) == null) {
-                throw new IllegalArgumentException("Invalid transportation type");
+                // Again, the distance is not specified in the requirements, but I will
+                // assume that it must be positive, as does not make sense to have negative
+                // distances
+                if (tDTO.getMonthlyDistance() < 0) {
+                    throw new IllegalArgumentException("Distance must be positive");
+                }
             }
-
-            // Again, the distance is not specified in the requirements, but I will
-            // assume that it must be positive, as does not make sense to have negative
-            // distances
-            if (tDTO.getMonthlyDistance() < 0) {
-                throw new IllegalArgumentException("Distance must be positive");
-            }
+        } else {
+            calcUpdateRequestDTO.setTransportation(new ArrayList<>());
         }
 
         // As it was not specified in the requirements,
