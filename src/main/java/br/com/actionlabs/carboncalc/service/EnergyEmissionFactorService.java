@@ -14,6 +14,14 @@ public class EnergyEmissionFactorService {
         return energyEmissionFactorRepository.findById(uf.toString()).get().getFactor();
     }
 
+    /**
+     * Calculates the carbon emission based on the energy consumption and the UF's energy emission factor.</br>
+     * The formula is: Carbon Emission = Energy Consumption * Energy Emission Factor
+     *
+     * @param energyConsumption the energy consumption
+     * @param uf the UF
+     * @return the carbon emission
+     */
     public double calculateCarbonEmission(int energyConsumption, UF uf) {
         return energyConsumption * getEnergyEmissionFactor(uf);
     }

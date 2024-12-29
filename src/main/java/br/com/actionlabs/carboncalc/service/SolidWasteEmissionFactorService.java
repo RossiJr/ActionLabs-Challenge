@@ -16,6 +16,17 @@ public class SolidWasteEmissionFactorService {
     }
 
 
+    /**
+     * Calculates the carbon emission from solid waste,
+     * based on the recyclable and non-recyclable factors for each UF and percentage. </br>
+     * The formula is: Carbon Emission =
+     *   (Solid Waste * Recycle Percentage * Recyclable Factor) +
+     *   (Solid Waste * (1 - Recycle Percentage) * Non-Recyclable Factor)
+     * @param solidWaste the provided solid waste
+     * @param recyclePercentage the recycle percentage (0 to 1)
+     * @param uf the UF
+     * @return the carbon emission
+     */
     public double calculateCarbonEmission(int solidWaste, double recyclePercentage, UF uf){
         SolidWasteEmissionFactor solidWasteEmissionFactor = getSolidWasteEmissionFactor(uf);
 

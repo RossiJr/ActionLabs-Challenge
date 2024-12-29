@@ -55,6 +55,7 @@ public class CalculationService {
             throw new IllegalArgumentException("Phone number cannot be empty");
         }
 
+
         Calculation obj = new Calculation();
         obj.setName(calcRequestDTO.getName());
         obj.setEmail(calcRequestDTO.getEmail());
@@ -77,6 +78,7 @@ public class CalculationService {
      * - Transportation</br>
      * - Solid waste</br>
      * - Recycle percentage
+     *
      * @param calcUpdateRequestDTO the request with the new data
      * @return true if the update was successful, throws an exception otherwise
      */
@@ -137,6 +139,49 @@ public class CalculationService {
         logger.info("Calculation updated: {}", calculation.getId());
 
         return true;
+    }
+
+
+    /**
+     * Calculates the carbon footprint based on the stored data
+     * @param id the calculation id
+     * @return the carbon footprint result
+     */
+    public CarbonCalculationResultDTO getCarbonFootprint(String id) {
+        Calculation calculation = calculationRepository.findById(id).orElse(null);
+        if (calculation == null) {
+            throw new IllegalArgumentException("Calculation not found");
+        }
+
+
+        // Calculates the carbon emission based on energy consumption
+        //  . (Carbon Emission = Energy Consumption * Emission Factor)
+        double energyConsumption = energyEmissionFactorService.calculateCarbonEmission(calculation.getEnergyConsumption(),
+                calculation.getUf());
+
+        // Calculates the carbon emission based on transportation
+        //  . (Carbon Emission = Distance * Emission Factor)
+        //  . The following reduce operation is based on the transportation list, summing the
+        //    result of the calculation for each element
+        double transportation = calculation.getTransportation().stream().reduce(0.0, (subtotal, tDTO) -> subtotal + transportationEmissionFactorService.calculateCarbonEmission(tDTO.getMonthlyDistance(),
+                TransportationType.fromString(tDTO.getType())), Double::sum);
+
+        // Calculates the carbon emission based on solid waste
+        //  . (Carbon Emission = Recyclable Waste + Non-Recyclable Waste)
+        //      . Recyclable Waste = (Solid Waste * Recycle Percentage) * Recyclable Factor
+        //      . Non-Recyclable Waste = (Solid Waste * (1 - Recycle Percentage)) * Non-Recyclable Factor
+        double solidWaste = solidWasteEmissionFactorService.calculateCarbonEmission(calculation.getSolidWasteTotal(),
+                calculation.getRecyclePercentage(), calculation.getUf());
+
+        CarbonCalculationResultDTO result = new CarbonCalculationResultDTO();
+        result.setEnergy(energyConsumption);
+        result.setTransportation(transportation);
+        result.setSolidWaste(solidWaste);
+        result.setTotal(energyConsumption + transportation + solidWaste);
+
+        logger.info("Calculation queried: {}", calculation.getId());
+
+        return result;
     }
 
 }

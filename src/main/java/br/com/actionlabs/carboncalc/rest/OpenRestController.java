@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class OpenRestController {
-    private static final Logger logger = LoggerFactory.getLogger(OpenRestController.class);
-
     @Autowired
     private CalculationService calculationService;
 
@@ -30,11 +28,13 @@ public class OpenRestController {
     @PutMapping("info")
     public ResponseEntity<UpdateCalcInfoResponseDTO> updateInfo(
             @RequestBody UpdateCalcInfoRequestDTO request) {
+
         return ResponseEntity.ok(new UpdateCalcInfoResponseDTO(calculationService.updateCalcInfo(request)));
     }
 
     @GetMapping("result/{id}")
     public ResponseEntity<CarbonCalculationResultDTO> getResult(@PathVariable String id) {
-        throw new RuntimeException("Not implemented");
+
+        return ResponseEntity.ok(calculationService.getCarbonFootprint(id));
     }
 }

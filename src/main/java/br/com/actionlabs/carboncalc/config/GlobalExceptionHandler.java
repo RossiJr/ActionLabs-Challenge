@@ -18,4 +18,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+
+    /**
+     * Handler for exceptions in general, which means an internal error has occurred
+     * @return A response entity <b>without</b> the exception message, but a default message to contact administrator
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException() {
+        return new ResponseEntity<>("An internal error has occurred. Please contact the administrator.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

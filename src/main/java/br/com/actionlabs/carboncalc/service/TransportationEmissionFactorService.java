@@ -15,6 +15,15 @@ public class TransportationEmissionFactorService {
         return transportationEmissionFactorRepository.findById(type).get().getFactor();
     }
 
+
+    /**
+     * Calculates the carbon emission based on the distance and the type's transportation emission factor.</br>
+     * The formula is: Carbon Emission = Distance * Transportation Emission Factor
+     *
+     * @param distance the distance
+     * @param type the transportation type
+     * @return the carbon emission
+     */
     public double calculateCarbonEmission(double distance, TransportationType type) {
         return distance * getTransportationEmissionFactor(type);
     }
