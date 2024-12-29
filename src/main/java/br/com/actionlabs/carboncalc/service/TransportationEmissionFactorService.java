@@ -22,8 +22,9 @@ public class TransportationEmissionFactorService {
      * The formula is: Carbon Emission = Distance * Transportation Emission Factor
      * </br>
      * The result is rounded to 6 decimal places to avoid double precision errors.
+     *
      * @param distance the distance
-     * @param type the transportation type
+     * @param type     the transportation type
      * @return the carbon emission (rounded to 6 decimal places)
      */
     public double calculateCarbonEmission(double distance, TransportationType type) {

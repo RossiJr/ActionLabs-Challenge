@@ -10,23 +10,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(
-            auth ->
-                auth.requestMatchers(
-                        "/login/**",
-                        "/open/**",
-                        "/status/**",
-                        "/swagger-ui/**",
-                        "swagger-ui.html",
-                        "/v3/api-docs/**",
-                        "/error")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-        .csrf(AbstractHttpConfigurer::disable);
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(
+                        auth ->
+                                auth.requestMatchers(
+                                                "/login/**",
+                                                "/open/**",
+                                                "/status/**",
+                                                "/swagger-ui/**",
+                                                "swagger-ui.html",
+                                                "/v3/api-docs/**",
+                                                "/error")
+                                        .permitAll()
+                                        .anyRequest()
+                                        .authenticated())
+                .csrf(AbstractHttpConfigurer::disable);
 
-    return http.build();
-  }
+        return http.build();
+    }
 }

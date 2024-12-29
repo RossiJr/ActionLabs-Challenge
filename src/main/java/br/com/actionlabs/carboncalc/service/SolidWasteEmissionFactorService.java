@@ -12,7 +12,7 @@ public class SolidWasteEmissionFactorService {
     @Autowired
     private SolidWasteEmissionFactorRepository solidWasteEmissionFactorRepository;
 
-    private SolidWasteEmissionFactor getSolidWasteEmissionFactor(UF uf){
+    private SolidWasteEmissionFactor getSolidWasteEmissionFactor(UF uf) {
         return solidWasteEmissionFactorRepository.findById(uf.toString()).get();
     }
 
@@ -21,16 +21,17 @@ public class SolidWasteEmissionFactorService {
      * Calculates the carbon emission from solid waste,
      * based on the recyclable and non-recyclable factors for each UF and percentage. </br>
      * The formula is: Carbon Emission =
-     *   (Solid Waste * Recycle Percentage * Recyclable Factor) +
-     *   (Solid Waste * (1 - Recycle Percentage) * Non-Recyclable Factor)
+     * (Solid Waste * Recycle Percentage * Recyclable Factor) +
+     * (Solid Waste * (1 - Recycle Percentage) * Non-Recyclable Factor)
      * </br>
      * The result is rounded to 6 decimal places to avoid double precision errors.
-     * @param solidWaste the provided solid waste
+     *
+     * @param solidWaste        the provided solid waste
      * @param recyclePercentage the recycle percentage (0 to 1)
-     * @param uf the UF
+     * @param uf                the UF
      * @return the carbon emission (rounded to 6 decimal places)
      */
-    public double calculateCarbonEmission(int solidWaste, double recyclePercentage, UF uf){
+    public double calculateCarbonEmission(int solidWaste, double recyclePercentage, UF uf) {
         SolidWasteEmissionFactor solidWasteEmissionFactor = getSolidWasteEmissionFactor(uf);
 
         double recyclableWaste = (solidWaste * recyclePercentage) * solidWasteEmissionFactor.getRecyclableFactor();

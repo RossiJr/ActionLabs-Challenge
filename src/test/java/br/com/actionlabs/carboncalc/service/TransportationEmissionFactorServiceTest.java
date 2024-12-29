@@ -1,10 +1,7 @@
 package br.com.actionlabs.carboncalc.service;
 
 import br.com.actionlabs.carboncalc.enums.TransportationType;
-import br.com.actionlabs.carboncalc.enums.UF;
-import br.com.actionlabs.carboncalc.model.EnergyEmissionFactor;
 import br.com.actionlabs.carboncalc.model.TransportationEmissionFactor;
-import br.com.actionlabs.carboncalc.repository.EnergyEmissionFactorRepository;
 import br.com.actionlabs.carboncalc.repository.TransportationEmissionFactorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

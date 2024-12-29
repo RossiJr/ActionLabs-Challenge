@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document("energyEmissionFactor")
 public class EnergyEmissionFactor {
-  @Id
-  private String uf;
-  private double factor;
+    @Id
+    private String uf;
+    private double factor;
 }

@@ -11,6 +11,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Handler for exceptions of type IllegalArgumentException, which means the supplied data is not valid
+     *
      * @param ex The exception
      * @return A response entity with the exception message and a BAD_REQUEST status
      */
@@ -22,6 +23,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Handler for exceptions in general, which means an internal error has occurred
+     *
      * @return A response entity <b>without</b> the exception message, but a default message to contact administrator
      */
     @ExceptionHandler(Exception.class)

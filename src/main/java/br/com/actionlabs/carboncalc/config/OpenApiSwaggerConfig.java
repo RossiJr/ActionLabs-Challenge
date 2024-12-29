@@ -15,30 +15,30 @@ import java.util.TreeMap;
 
 @Configuration
 public class OpenApiSwaggerConfig {
-  @Value("${server.version}")
-  private String version;
-  @Autowired
-  private Environment env;
+    @Value("${server.version}")
+    private String version;
+    @Autowired
+    private Environment env;
 
-  @Bean
-  public GroupedOpenApi publicApi() {
-    return GroupedOpenApi.builder()
-        .group("spring")
-        .packagesToScan("br.com.actionlabs.carboncalc.rest")
-        .addOpenApiCustomizer(sortPathsAlphabetically())
-        .build();
-  }
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("spring")
+                .packagesToScan("br.com.actionlabs.carboncalc.rest")
+                .addOpenApiCustomizer(sortPathsAlphabetically())
+                .build();
+    }
 
-  private OpenApiCustomizer sortPathsAlphabetically() {
-    return openApi -> {
-      TreeMap<String, io.swagger.v3.oas.models.PathItem> sortedPaths = new TreeMap<>(Comparator.naturalOrder());
-      sortedPaths.putAll(openApi.getPaths());
+    private OpenApiCustomizer sortPathsAlphabetically() {
+        return openApi -> {
+            TreeMap<String, io.swagger.v3.oas.models.PathItem> sortedPaths = new TreeMap<>(Comparator.naturalOrder());
+            sortedPaths.putAll(openApi.getPaths());
 
-      Paths paths = new Paths();
-      paths.putAll(sortedPaths);
+            Paths paths = new Paths();
+            paths.putAll(sortedPaths);
 
-      openApi.setPaths(paths);
-    };
-  }
+            openApi.setPaths(paths);
+        };
+    }
 
 }

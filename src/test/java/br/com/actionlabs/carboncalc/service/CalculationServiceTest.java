@@ -4,9 +4,7 @@ import br.com.actionlabs.carboncalc.dto.*;
 import br.com.actionlabs.carboncalc.enums.TransportationType;
 import br.com.actionlabs.carboncalc.enums.UF;
 import br.com.actionlabs.carboncalc.model.Calculation;
-import br.com.actionlabs.carboncalc.model.EnergyEmissionFactor;
 import br.com.actionlabs.carboncalc.repository.CalculationRepository;
-import br.com.actionlabs.carboncalc.repository.EnergyEmissionFactorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -28,8 +26,6 @@ public class CalculationServiceTest {
     private CalculationRepository calculationRepository;
     @InjectMocks
     private CalculationService calculationService;
-    @Mock
-    private EnergyEmissionFactorRepository energyEmissionFactorRepository;
     @Mock
     private EnergyEmissionFactorService energyEmissionFactorService;
     @Mock

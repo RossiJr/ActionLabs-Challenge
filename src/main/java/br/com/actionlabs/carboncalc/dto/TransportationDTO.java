@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class TransportationDTO {
-  private String type;
-  private int monthlyDistance;
+    private String type;
+    private int monthlyDistance;
 }

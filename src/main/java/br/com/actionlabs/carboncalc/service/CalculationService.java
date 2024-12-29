@@ -155,6 +155,7 @@ public class CalculationService {
 
     /**
      * Calculates the carbon footprint based on the stored data
+     *
      * @param id the calculation id
      * @return the carbon footprint result
      */

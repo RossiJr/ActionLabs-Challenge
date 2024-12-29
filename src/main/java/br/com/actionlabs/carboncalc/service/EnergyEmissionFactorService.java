@@ -20,8 +20,9 @@ public class EnergyEmissionFactorService {
      * The formula is: Carbon Emission = Energy Consumption * Energy Emission Factor
      * </br>
      * The result is rounded to 6 decimal places to avoid double precision errors.
+     *
      * @param energyConsumption the energy consumption
-     * @param uf the UF
+     * @param uf                the UF
      * @return the carbon emission (rounded to 6 decimal places)
      */
     public double calculateCarbonEmission(int energyConsumption, UF uf) {

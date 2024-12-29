@@ -18,16 +18,16 @@ import java.util.Date;
 @Slf4j
 public class StatusRestController {
 
-  @Value("${server.version}")
-  private String version;
+    @Value("${server.version}")
+    private String version;
 
 
-  @ResponseBody
-  @GetMapping("/check")
-  public ServerStatusDTO checkStatus() {
-    long currentTimeMillis = System.currentTimeMillis();
-    return new ServerStatusDTO(version, currentTimeMillis, new Date(currentTimeMillis).toString());
-  }
+    @ResponseBody
+    @GetMapping("/check")
+    public ServerStatusDTO checkStatus() {
+        long currentTimeMillis = System.currentTimeMillis();
+        return new ServerStatusDTO(version, currentTimeMillis, new Date(currentTimeMillis).toString());
+    }
 
 }
 
