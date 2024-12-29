@@ -65,6 +65,13 @@ public class CalculationService {
         obj.setCreatedAt(Instant.now());
         obj.setUpdatedAt(Instant.now());
 
+        // Initialize values as default
+        obj.setEnergyConsumption(0);
+        obj.setTransportation(new ArrayList<>());
+        obj.setSolidWasteTotal(0);
+        obj.setRecyclePercentage(0);
+
+
         Calculation calculation = calculationRepository.save(obj);
 
         logger.info("Calculation started: {}", calculation.getId());
