@@ -31,7 +31,7 @@ public enum UF {
 
     public static UF fromString(String uf) {
         for (UF value : UF.values()) {
-            if (value.name().equals(uf.toUpperCase())) {
+            if (value.name().equalsIgnoreCase(uf)) {
                 return value;
             }
         }

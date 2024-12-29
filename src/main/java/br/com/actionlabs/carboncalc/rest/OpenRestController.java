@@ -30,7 +30,7 @@ public class OpenRestController {
     @PutMapping("info")
     public ResponseEntity<UpdateCalcInfoResponseDTO> updateInfo(
             @RequestBody UpdateCalcInfoRequestDTO request) {
-        throw new RuntimeException("Not implemented");
+        return ResponseEntity.ok(new UpdateCalcInfoResponseDTO(calculationService.updateCalcInfo(request)));
     }
 
     @GetMapping("result/{id}")
